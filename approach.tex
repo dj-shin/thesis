@@ -1,0 +1,54 @@
+\section{Approach}
+
+To address the limitations identified in the previous section we need better representation which contains comprehensive semantics, other than just code metrics.
+% we need better ~ 대신 'DL을 쓸거고 새로운 representation을 쓸거다'
+% 왜 DL을 쓰는지, 왜 이런 representation을 써야 하는지 
+
+\begin{itemize}
+\item
+First, to achieve function-level granularity, basic structure of source code should be included.
+% LoC 같은걸론 파악할 수 없다는 걸 말하기 위함인데 부가설명이 필요한듯
+% dawn song 논문에 DL을 써야하는 이유
+% => DL을 쓰는데 representation에 이러이런게 필요하다 => CPG
+
+\item
+Control flow and dependence of program are also required, since same code can be either safe or vulnerable depending on the context.
+\end{itemize}
+
+We use code property graph which combines abstract syntax tree, control flow graph, and program dependency graph,
+therefore comprehensively represents our requirements mentioned above.
+% CPG 자체에 대한 언급은 아래 subsection으로. 조건만
+
+\subsection{Representation}
+
+Code property graph is introduced to effectively mine large amounts of source code for vulnerabilities.
+
+\begin{itemize}
+\item
+AST
+\item
+CFG
+\item
+PDG
+\end{itemize}
+\subsection{Neural Network for Graph Data}
+
+Since we will use CPG as program vector representation, we select learning models among which takes graph data as input.
+
+\begin{itemize}
+\item
+Graph kernel
+
+\item
+Graph Neural Network
+
+\item
+Convolutional Neural Network
+
+\begin{itemize}
+
+\item
+Convolutional neural network is typical deep learning model used widely in image recognition. Typically convolutional neural network takes 2-dimensional data, usually image, as input and feed forward them in network with convolution operations.
+\end{itemize}
+
+\end{itemize}

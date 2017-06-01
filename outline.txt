@@ -1,0 +1,52 @@
+Problem Definition & previous research
+
+Software Defect Prediction
+
+Vulnerability detection has been developed in the form of software defect prediction.
+  Software defect predictions is based on the ground assumption: the more complex the code, the more it is defect-prone.
+  Defect prediction represents software with metrics of product and process, such as number of procedure calls, number of lines of code, or number of changes to the code.
+
+Classic defect prediction methods have been developed in terms of introducing new metrics.
+
+Current defect prediction methods make use of machine learning techniques.
+  Feature subset selection aims to find optimal set of metrics for defect prediction.
+  Feature generation aims to generate new metrics for defect prediction with Deep Belief Network.
+ 
+However, software metrics used for defect prediction are rather naive to detect vulnerability with high accuracy and granularity.
+  For instance, vulnerabilities like buffer overflow cannot be detected accurately with simple code metrics since they can occur regardless of code complexity.
+  Metric-based method also cannot determine the type of detected vulnerability.
+  It also lacks granularity, as most previous researches provide module-level prediction.
+
+In order to reflect more sophisticated attributes of software, other means of representation and algorithm is required.
+  Deep learning is capable of detecting vulnerability within software.
+ 
+For deep learning building program vector representations is needed.
+  Raw binary data can be used as input for deep learning.
+  Representations such as AST, control flow graph, program dependency graph are based on source code.
+    AST
+    CFG
+    PDG
+  Other intermediate representations are also possible such as LLVM IR or bytecode.
+
+Approach
+
+Code property graph is introduced to effectively mine large amounts of source code for vulnerabilities.
+  We expect CPG contains enough semantics to detect vulnerability and determine its type with high accuracy and granularity.
+
+Since we will use CPG as program vector representation, we select learning models among which takes graph as input.
+  Classic graph neural networks are mostly used on datasets such as protein compound structure graph.
+  CPGs are much more complex than datasets typical applications of graph neural network.
+
+  Graph kernels
+    WL kernel
+
+    Gated neural network
+
+    CNN
+      Convolutional neural network is typical deep learning model used widely in image recognition.
+      Typically convolutional neural network takes two-dimensional data, usually image, as input and feed forward them in network with convolution operations.
+      Convolutional neural networks for graphs. 
+
+Dataset
+  
+ 
