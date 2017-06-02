@@ -1,27 +1,32 @@
 \section{Approach}
 
-To address the limitations identified in the previous section we need better representation which contains comprehensive semantics, other than just code metrics.
+To address the limitations identified in the previous section we use deep learning with different representation which contains more comprehensive semantics.
+Applying deep learning for software analysis has advantages in many perspectives \cite{shin2015recognizing}.
+
+To use deep learning the way of representing dataset, i.e. softwares, is required and should meet the following criteria:
+
 % we need better ~ 대신 'DL을 쓸거고 새로운 representation을 쓸거다'
 % 왜 DL을 쓰는지, 왜 이런 representation을 써야 하는지 
 
-\begin{itemize}
-\item
-First, to achieve function-level granularity, basic structure of source code should be included.
+\textbf{Program Structure.} Detailed information of software should be included in order to achieve function-level granularity.
+Representation should be able to determine in which function the vulnerability resides, which cannot be accomplished with simple code metrics such as LoC.
+Therefore program structure should be included at some level to help model determine the location of vulnerability.
+Both the raw form such as binary \cite{shin2015recognizing, kosmidis2017machine} and preprocessed form such as abstract syntax trees (AST) \cite{wang2016automatically}
+have been used as representation of software for deep learning models.
+
 % LoC 같은걸론 파악할 수 없다는 걸 말하기 위함인데 부가설명이 필요한듯
 % dawn song 논문에 DL을 써야하는 이유
 % => DL을 쓰는데 representation에 이러이런게 필요하다 => CPG
 
-\item
-Control flow and dependence of program are also required, since same code can be either safe or vulnerable depending on the context.
-\end{itemize}
+\textbf{Program Context.} Control flow and dependence of program are also required. Since same code can be either safe or vulnerable depending on the context.
+Figure shows how almost identical programs can be classified differently by the context.
+This difference cannot be distinguished by program structures only. Hence, additional information in representation is required.
 
-We use code property graph which combines abstract syntax tree, control flow graph, and program dependency graph,
-therefore comprehensively represents our requirements mentioned above.
 % CPG 자체에 대한 언급은 아래 subsection으로. 조건만
 
 \subsection{Representation}
-
-Code property graph is introduced to effectively mine large amounts of source code for vulnerabilities.
+We use code property graph which was introduced to effectively mine large amounts of source code for vulnerabilities \cite{yamaguchi2014modeling}.
+Code property graph combines AST, control flow graph (CFG) and program dependency graph (PDG), therefore comprehensively includes requirements mentioned above.
 
 \begin{itemize}
 \item
@@ -31,9 +36,10 @@ CFG
 \item
 PDG
 \end{itemize}
+
 \subsection{Neural Network for Graph Data}
 
-Since we will use CPG as program vector representation, we select learning models among which takes graph data as input.
+Since we will use code property graph as program representation, we need learning model which takes graph data as input.
 
 \begin{itemize}
 \item
