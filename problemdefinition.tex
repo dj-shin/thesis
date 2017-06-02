@@ -9,17 +9,21 @@ and claim the need for a new means of vulnerability detection by showing their l
 
 \subsection{Problem Definition}
 
-How to detect vulnerability in software has been studied long and diverse methods has been introduced.
+Many large softwares contain more or less vulnerabilities. In linux kernel, hundreds of vulnerabilities are found each year \cite{cvelinux}.
+How to detect these vulnerability in software has been studied long and diverse methods has been introduced.
+Previous methods include static or dynamic analysis, formal verfication, or 
 
-\subsection{Static Analysis}
+\subsubsection{Static Analysis}
 
 KLEE
 
-\subsection{Program Verification}
+\subsubsection{Dynamic Analysis}
+
+\subsubsection{Formal Verification}
 
 Coq
 
-\subsection{Bug Detection}
+\subsubsection{Bug Detection}
 
 Software defect prediction is one of classic bug detection methods.
 Approaches using machine learning have been applied to improve the accuracy of prediction.
@@ -33,25 +37,3 @@ However software metrics used for prediction are rater naive to detect vulnerabi
 with high accuracy and granularity.
 
 In order to reflect more sophisticated attributes of software, other means of representation and algorithm is required.
-
-\eat{
-Vulnerability detection has been developed in the form of software defect prediction.
-Software defect prediction is a metric-based method to detect bugs in softwares. 
-It is based on the ground assumption: the more complex the code, the more it is defect-prone.
-Defect prediction represents software with metrics of product and process,
-such as number of procedure calls, number of lines of code, or number of changes to the code.
-
-Classic defect prediction methods have been developed in terms of introducing new metrics.
-Current defect prediction methods make use of machine learning techniques.
-Feature subset selection aims to find optimal set of metrics for defect prediction.
-Feature generation aims to generate new metrics for defect prediction with Deep Belief Network.
- 
-However, software metrics used for defect prediction are rather naive to
-detect vulnerability with high accuracy and granularity.
-For instance, vulnerabilities like buffer overflow cannot be detected accurately with simple code metrics
-since they can occur regardless of code complexity.
-Metric-based method also cannot determine the type of detected vulnerability.
-It also lacks granularity, as most previous researches provide module-level prediction.
-
-In order to reflect more sophisticated attributes of software, other means of representation and algorithm is required.
-}

@@ -3,32 +3,41 @@
 \setlength{\paperheight}{11in}
 \setlength{\paperwidth}{8.5in}
 \usepackage[
-  pass,
+  pass,% keep layout unchanged 
+  % showframe,% show the layout
 ]{geometry}
 
 
-\usepackage{url}
+\usepackage{times}
+%\usepackage{fullpage}
 
+%graphics packages
 \usepackage[tight]{subfigure}
 \usepackage{graphicx}
 \usepackage{epstopdf}
-\usepackage{amsmath}
 \usepackage{epsfig}
-\usepackage{rotating}
 \usepackage{adjustbox}
-\usepackage{multirow}
-\usepackage{changepage}
-\usepackage{amsfonts}
+\usepackage{pbox}
+\usepackage{rotating}
 
-\usepackage{color}
-\usepackage{xspace}
+% table packages
+\usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{tabularx}
-\usepackage{listings}
+
+\usepackage{changepage}
+%\usepackage{cite}
+\usepackage{color}
+\usepackage{xspace}
+\usepackage{listings} % code inlining
 \usepackage[labelfont=bf,font=small,skip=5pt]{caption}
 \usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsfonts}
+\usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage[breaklinks,colorlinks, draft]{hyperref}
+\usepackage[hyphens,obeyspaces,spaces]{url}
+\usepackage[breaklinks, colorlinks]{hyperref}
+\hypersetup{citecolor=blue,linkcolor=blue}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -84,9 +93,6 @@
 \end{sloppypar}
 
 \bibliographystyle{abbrv}
-\bibliography{asa}
-
-\newpage
-\appendix
+\bibliography{thesis}
 
 \end{document}
