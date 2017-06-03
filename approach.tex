@@ -11,7 +11,7 @@ To use deep learning the way of representing dataset, i.e. softwares, is require
 \textbf{Program Structure.} Detailed information of software should be included in order to achieve function-level granularity.
 Representation should be able to determine in which function the vulnerability resides, which cannot be accomplished with simple code metrics such as LoC.
 Therefore program structure should be included at some level to help model determine the location of vulnerability.
-Both the raw form such as binary \cite{shin2015recognizing, kosmidis2017machine} and preprocessed form such as abstract syntax trees (AST) \cite{wang2016automatically}
+Both the raw form such as binary \cite{shin2015recognizing, kosmidis2017machine} and preprocessed form such as abstract syntax trees \cite{wang2016automatically}
 have been used as representation of software for deep learning models.
 
 % LoC 같은걸론 파악할 수 없다는 걸 말하기 위함인데 부가설명이 필요한듯
@@ -26,35 +26,39 @@ This difference cannot be distinguished by program structures only. Hence, addit
 
 \subsection{Representation}
 We use code property graph which was introduced to effectively mine large amounts of source code for vulnerabilities \cite{yamaguchi2014modeling}.
-Code property graph combines AST, control flow graph (CFG) and program dependency graph (PDG), therefore comprehensively includes requirements mentioned above.
+Code property graph combines abstract syntax tree, control flow graph and program dependency graph, therefore comprehensively includes requirements mentioned above.
 
-\begin{itemize}
-\item
-AST
-\item
-CFG
-\item
-PDG
-\end{itemize}
+\textbf{Abstract Syntax Tree (AST)} Abstract syntax trees represent structure of source code in an abstract way.
+Figure shows example AST for the code sample given above.
+Their nodes do not necessarily correspond to exact syntax token of the program but can represent larger semantic unit such as condition expression or variable declaration.
 
-\subsection{Neural Network for Graph Data}
+\textbf{Control Flow Graph (CFG)} Control flow graph describes conditions and order of each execution path of program.
+Figure shows example CFG for the code sample given above.
+While control flow graph provides information of condition and context, data flow is still required to determine the exact attack vector.
 
-Since we will use code property graph as program representation, we need learning model which takes graph data as input.
+\textbf{Program Dependency Graph (PDG)} Program dependency graph consists of two types of edges: data dependency edges and control dependency edges.
+Figure shows example PDG for the code sample given above, data and control dependency edges are labeled as D and C respectively.
+Data dependency edges connect variable values and statements affected by them.
+Control dependency edges are different from control flow graph since the former do not contain execution order but show dependencies more clearly.
 
-\begin{itemize}
-\item
-Graph kernel
+The combination of three graphs forms code property graph shown in figure below.
 
-\item
-Graph Neural Network
+\subsection{Learning Model for Graph Data}
 
-\item
-Convolutional Neural Network
+Since we use code property graph as program representation, we need neural network model which takes graph data as input.
+Code property graph is a directed graph with edges of multiple attributes.
+We consider typical learning models for graph data:
 
-\begin{itemize}
+\textbf{Graph Kernel.} Graph kernel is a function that computes similarities between inputs.
+Graph kernel has been mainly applied in bioinformatics and chemoinformatics, for instance, predicting protein function by its structure.
+Classic graph kernels are based on walks and paths, subgraphs or subtrees.
+Weisfeiler-Lehman (WL) graph kernel \cite{shervashidze2011weisfeiler} is state-of-the-art among graph kernels.
+\textit{WL kernel description}
 
-\item
-Convolutional neural network is typical deep learning model used widely in image recognition. Typically convolutional neural network takes 2-dimensional data, usually image, as input and feed forward them in network with convolution operations.
-\end{itemize}
+\textbf{Graph Neural Network} Graph neural network (GNN) is a learning model which directly uses input graph layout as model \cite{gori2005new}.
+\textit{GNN description}
 
-\end{itemize}
+\textbf{Convolutional Neural Network} Convolutional neural network (CNN) is typical deep learning model used widely in image recognition.
+Typically CNN takes 2-dimensional data, usually image, as input and feed forward them in network with convolution operations.
+Niepert et al. presented an approach to process general graphs with CNN by considering input of classic CNN as lattice graph \cite{niepert2016learning}.
+\textit{CNN description}
