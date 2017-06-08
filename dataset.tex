@@ -1,17 +1,10 @@
 \section{Dataset}
 
-\begin{itemize}
-\item
-Dataset is an important part of learning our model.
+Dataset is an important factor of learning the model. In order to detect vulnerabilities with function-level granularity and to classify them with type, we need each function labeled either secure or not, and with type of vulnerability if insecure.
 
-\item
-In order to detect vunlerability with function-level granularity and to classify them with type,
-we need each function labeled either secure or not, and with type of vulnerability if insecure.
-
-\item
 Despite the number of available source codes, labeling them is challenging.
-% 왜 challenging한지
+Tera-PROMISE \cite{promiserepo} is a research dataset repository for software engineering. Although it has been widely used in area of software defect prediction, its datasets are labeled with code metrics which cannot be used to our model.
+Neuhaus et al. used vulnerabilities database from Mozilla project to predict vulnerable component based on function calls, but granularity still remains at module level \cite{neuhaus2007predicting}.
+How to label certain function code as secure can also be a challenge. It can be clearly shown if the code does have vulnerability, while strictly proving it doesn't can only be done by formal verification.
 
-\item
-We collected pull requests of which title containing vulnerability type, e.g. buffer overflow, from Github and labeled merged commit as secure and base commit as vulnerable.
-\end{itemize}
+We collected merged pull requests of which title containing vulnerability type (e.g., buffer overflow) from Github. Then we labeled merged commit as secure and base commit as insecure. Gao et al. also labeled software module as safe when no vulnerabilites were found in later releases \cite{gao2011choosing}.

@@ -1,65 +1,3 @@
-@string{proc-nsdi = "{USENIX} {NSDI}"}
-@string{proc-sosp = "{SOSP}"}
-@string{proc-podc = "{PODC}"}
-@string{proc-usenix = "{USENIX} {ATC}"}
-@string{proc-sigcomm = "{SIGCOMM}"}
-@string{proc-crypto = "{CRYPTO}"}
-@string{proc-iptps = "{IPTPS}"}
-@string{proc-infocom = "{INFOCOM}"}
-@string{proc-vldb = "{VLDB}"}
-@string{proc-hotnets = "{HotNets}"}
-@string{proc-toc = "{STOC}"}
-@string{proc-mmcn = "{MMCN}"}
-@string{proc-asplos = "ASPLOS"}
-@string{proc-osdi = "{USENIX} {OSDI}"}
-@string{proc-spaa = "{SPAA}"}
-@string{proc-eurowork = "{SIGOPS} European Workshop"}
-@string{proc-hotos = "HotOS"}
-@string{proc-fast = "{USENIX} {FAST}"}
-@string{proc-stoc = "{STOC}"}
-@string{proc-worlds = "{USENIX} {WORLDS}"}
-@string{proc-tocs = "{ACM} {TOCS}"}
-@string{proc-pds = "{IEEE} {Transactions on Parallel and Distributed Systems}"}
-@string{proc-sruti = "{USENIX} {SRUTI}"}
-@string{proc-focs = "{IEEE} {FOCS}"}
-@string{proc-hotdep = "{ACM} {HotDep}"}
-@string{proc-security = "{USENIX} {Security}"}
-@string{proc-ndss = "{ISOC} {NDSS}"}
-@string{proc-eurosys = "{ACM} {EuroSys}"}
-@string{proc-asiacrypt = "{Asiacrypt}"}
-@string{proc-sisw = "{SISW}"}
-@string{proc-ccs = "{ACM} {CCS}"}
-@string{proc-oakland = "{IEEE} {S\&P (Oakland)}"}
-@string{proc-dsn = "{IEEE} {DSN}"}
-@string{proc-dsom = "{IFIP} {DSOM}"}
-@string{proc-icdcs = "{ICDCS}"}
-@string{proc-icsa = "{ICSA}"}
-@string{proc-www = "{WWW}"}
-@string{proc-hpca = "{HPCA}"}
-@string{proc-mobisys = "{ACM} {MobiSys}"}
-@string{proc-mccr = "{MCCR}"}
-@string{proc-hotmobile = "{HotMobile}"}
-@string{proc-mobivirt = "{MobiVirt}"}
-@string{proc-ubicomp = "{UbiComp}"}
-@string{proc-percom = "{PerCom}"}
-@string{proc-pldi = "{PLDI}"}
-@string{proc-icde = "{ICDE}"}
-@string{proc-cases= "{CASES}"}
-@string{proc-pods= "{PODS}"}
-@string{proc-sac= "{SAC}"}
-@string{proc-ipdps= "{IPDPS}"}
-@string{proc-popl = "{POPL}"}
-@string{proc-icpp = "{ICPP}"}
-@string{proc-cluster = "{CLUSTER}"}
-@string{proc-osr = "{OSR}"}
-@string{proc-middleware = "{Middleware}"}
-@string{proc-socc = "{SOCC}"}
-@string{proc-sigmod = "{SIGMOD}"}
-@string{proc-spsm = "{ACM} {SPSM}"}
-@string{proc-webapps = "{USENIX} {WebApps}"}
-@string{proc-asiaccs = "{ACM} {ASIACCS}"}
-@string{proc-rsa = "{RSA}"}
-
 @misc{cvelinux,
   title = {Linux Linux Kernel: CVE security vulnerabilities, versions and detailed reports},
   howpublished = {\url{http://www.cvedetails.com/product/47/Linux-Linux-Kernel.html?vendor_id=33}},
@@ -79,10 +17,25 @@
   howpublished = {\url{http://plv.mpi-sws.org/rustbelt/}},
 }
 
-@misc{valgrind,
-  title = {Valgrind},
-  howpublished = {\url{http://valgrind.org/}},
-}
+@article{valgrind,
+ author = {Nethercote, Nicholas and Seward, Julian},
+ title = {Valgrind: A Framework for Heavyweight Dynamic Binary Instrumentation},
+ journal = {SIGPLAN Not.},
+ issue_date = {June 2007},
+ volume = {42},
+ number = {6},
+ month = jun,
+ year = {2007},
+ issn = {0362-1340},
+ pages = {89--100},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/1273442.1250746},
+ doi = {10.1145/1273442.1250746},
+ acmid = {1250746},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {Memcheck, Valgrind, dynamic binary analysis, dynamic binary instrumentation, shadow values},
+} 
 
 @inproceedings{huang2015code,
   title={Code Coverage Measurement for Android Dynamic Analysis Tools},
@@ -201,4 +154,53 @@
   pages={729--734},
   year={2005},
   organization={IEEE}
+}
+
+@misc{promiserepo,
+  authors =	 "Menzies, T., Krishna, R., Pryor, D.",
+  year =	 2015,
+  title =	 "The Promise Repository of
+                  Empirical Software Engineering
+                  Data",
+  notes =	 "http://openscience.us/repo.  North
+                  Carolina State University,
+                  Department of Computer Science"
+}
+
+@inproceedings{neuhaus2007predicting,
+  title={Predicting vulnerable software components},
+  author={Neuhaus, Stephan and Zimmermann, Thomas and Holler, Christian and Zeller, Andreas},
+  booktitle={Proceedings of the 14th ACM conference on Computer and communications security},
+  pages={529--540},
+  year={2007},
+  organization={ACM}
+}
+
+@InProceedings{YamGolArpRie14,
+  author =       {Yamaguchi, Fabian and Golde, Nico and Arp, Daniel and Rieck, Konrad},
+  title =        {Modeling and Discovering Vulnerabilities with Code Property Graphs},
+  booktitle =    {Proc. of IEEE Symposium on Security and Privacy (S\&P)},
+  year =         {2014}
+}
+
+
+@article{McKay201494,
+  title = "Practical graph isomorphism, \{II\} ",
+  journal = "Journal of Symbolic Computation ",
+  volume = "60",
+  number = "0",
+  pages = "94 - 112",
+  year = "2014",
+  note = "",
+  issn = "0747-7171",
+  doi = "http://dx.doi.org/10.1016/j.jsc.2013.09.003",
+  url = "http://www.sciencedirect.com/science/article/pii/S0747717113001193",
+  author = "Brendan D. McKay and Adolfo Piperno"
+}
+
+@article{li2015gated,
+  title={Gated graph sequence neural networks},
+  author={Li, Yujia and Tarlow, Daniel and Brockschmidt, Marc and Zemel, Richard},
+  journal={arXiv preprint arXiv:1511.05493},
+  year={2015}
 }

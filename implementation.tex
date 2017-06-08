@@ -1,1 +1,8 @@
 \section{Implementation}
+
+We implemented vulnerability detection model as convolutional neural network.
+Dataset of source codes are first converted by Joern \cite{YamGolArpRie14}.
+Joern generates code property graph from C/C++ source code repository.
+Generated graphs include not only AST, CFG, and PDG, but also nodes and edges describing file and directory structure of source code.
+Thus we parsed them to contain only useful information, only including code section relevant to vulnerability and excluding irrelevant attributes.
+The following stages of learning are implemented as same as PATCHY-SAN \cite{niepert2016learning}.
