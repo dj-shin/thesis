@@ -1,10 +1,21 @@
 \section{Dataset}
+\label{section:dataset}
 
-Dataset is an important factor of learning the model. In order to detect vulnerabilities with function-level granularity and to classify them with type, we need each function labeled either secure or not, and with type of vulnerability if insecure.
+Dataset is an important factor of learning the model.
+In order to detect vulnerabilities with function-level granularity and to classify them with type, we need each function labeled either secure or not, and with type of vulnerability if insecure.
 
 Despite the number of available source codes, labeling them is challenging.
-Tera-PROMISE \cite{promiserepo} is a research dataset repository for software engineering. Although it has been widely used in area of software defect prediction, its datasets are labeled with code metrics which cannot be used to our model.
+Tera-PROMISE \cite{promiserepo} is a research dataset repository for software engineering. Although it has been widely used in area of metric-based bug detection, its datasets are labeled with code metrics which cannot be used to our model.
+% SDP라는 용어 자체를 빼는 게 좋을듯. 부연설명 추가
 Neuhaus et al. used vulnerabilities database from Mozilla project to predict vulnerable component based on function calls, but granularity still remains at module level \cite{neuhaus2007predicting}.
-How to label certain function code as secure can also be a challenge. It can be clearly shown if the code does have vulnerability, while strictly proving it doesn't can only be done by formal verification.
 
-We collected merged pull requests of which title containing vulnerability type (e.g., buffer overflow) from Github. Then we labeled merged commit as secure and base commit as insecure. Gao et al. also labeled software module as safe when no vulnerabilites were found in later releases \cite{gao2011choosing}.
+% granularity 관련 / labeling 으로 section 분리
+How to label certain function code as secure can also be a challenge.
+It can be clearly shown if the code does have vulnerability, while strictly proving it doesn't can only be done by formal verification.
+Gao et al. considered software module as safe when no vulnerabilities were found in later releases \cite{gao2011choosing}.
+I follow such insight when creating my code dataset.
+
+% 위에 언급한 문제점 때문에 직접 dataset을 모았다.
+Due to limitations of existing datasets described above, I collected new source code dataset from Github.
+I collected merged pull requests of which title containing vulnerability type (e.g., buffer overflow).
+Then I labeled merged commit as secure and base commit as insecure.

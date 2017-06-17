@@ -1,12 +1,13 @@
 \begin{figure}[t]
 \begin{lstlisting}[frame=single,basicstyle=\ttfamily\small]	
-void f()
+int f(bool x)
 {
-    int x = g();
-    if (x == VAL) {
-        int y = x + 1;
-        h(y);
-    }
+    if (x) {
+		return 1;
+	}
+	else {
+		return 2;
+	}
 }
 \end{lstlisting}
 \vspace{-12pt}

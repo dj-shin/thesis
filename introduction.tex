@@ -1,1 +1,61 @@
 \section{Introduction}
+\label{section:introduction}
+
+Modern softwares are as complex as ever. As they rapidly grow in quantity, flaws in such systems are becoming more prevalent.
+Since a single defect can compromise the entire system, detecting these flaws is an important task.
+% 논문 쓸 때 as는 의미가 많아서 피하는 
+While most of these system flaws are just minor bugs, some can be controlled by malicious attackers and permit unauthorized actions.
+Thus, it is important to find such critical flaws, which are called \textit{vulnerabilities}.
+% flaw가 malfunction이 아니라 system이 malfunction이 되어야 할 텐데
+% controlled 대신 compromised
+% attacker -> attackers
+%
+% 문장이 좀 이상함
+% `대부분의 flaw는 사소한 버그인데, 몇몇은 전체 시스템을 compromise 할만큼 중대하다. 그러므로 이런걸 찾는게 중요하다`
+In linux kernel, hundreds of such vulnerabilities are found every year \cite{cvelinux}.
+Thus, due to the increasing number of such vulnerabilities followed by the increase of system flaws, we need an automated way of detecting software vulnerabilities.
+% flaw가 증가함에 따라 vuln도 증가한다. 그렇기 때문에 자동화해야한다. In linux kernel ~
+
+Various methods of detecting vulnerabilities have been introduced such as static and dynamic analysis, and other methods which will be described in Section~\ref{section:problem}.
+Static analysis includes symbolic execution which provides exact attack vector with high accuracy.
+However, execution time of symbolic execution dramatically increases when the target software is complex, making it impractical to be applied to modern softwares.
+Dynamic analysis such as fuzzing can find vulnerabilities in reasonable time.
+Nevertheless, some softwares are difficult to be analysed dynamically, and dynamic analysis cannot be fully automated since they require manual specifications.
+% 각 기법에 예시가 들어가야 하는데 예시의 예시가 들어가면 복잡함
+% 자동화해서 찾기 위해 static analysis: 예시, dynamic: 예시, other: 예시
+% 나열식으로 길게 써도 됨
+% 예시 필요: granularity / accuracy + 실행 시간
+% false positive 없는게 중요
+In order to resolve such limitations of existing methods, I propose vulnerability detection model combining comprehensive representation and machine learning.
+I use code property graph, a graph data structure presented to model vulnerability in software code, as input representation to my learning model.
+% 여기도 중복되는 문장 고치기
+I also introduce various machine learning models to process such representation.
+% Then 빼는게 나을
+
+I present the following contributions in this work:
+\begin{itemize}
+\item
+I suggest how the software code should be transformed to train vulnerability detection model.
+% 취약점을 training하기 위해서 어떻게 code를 변환해야 할지 제안
+% We use code property graph as such representation
+I use code property graph as such representation, and show that code property graph provides necessary information to detect vulnerabilities in software with high granularity and accuracy.
+% vuln -> vulns
+\item
+I investigated various neural network models to process the graph data.
+% 관사 사용
+I implemented the model which extends convolutional neural network to process arbitrary graphs.
+\item
+I generated dataset labeled with the type of vulnerability from open source repositories.
+Compared to existing datasets used in classical software defect prediction, my dataset is labeled in function-level,
+thus enabling learning model to detect vulnerability with higher granularity.
+\end{itemize}
+% 실행시간 이득도 설
+
+The rest of the paper is organized as follows:
+Section~\ref{section:background} describes background knowledge to understand vulnerability detection and neural network.
+Section~\ref{section:problem} describes my problem domain and requirements to my objectives.
+Section~\ref{section:previous} introduces previous works on vulnerability detection and their limitations I focus on.
+Section~\ref{section:approach} suggests my approach on designing new detection model including code property graph and neural network for graph data.
+Section~\ref{section:dataset} introduces my methods to generate an appropriate software code dataset for my learning model.
+Section~\ref{section:implementation} describes detailed implementation of my model followed by related works in Section~\ref{section:related}.
+Finally, I conclude my work with some future works in Section~\ref{section:conclusion}.

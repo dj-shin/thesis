@@ -1,47 +1,73 @@
 \section{Approach}
-
-To address the limitations identified in the previous section we use deep learning with different representation which contains more comprehensive semantics.
-Applying deep learning for software analysis has advantages in many perspectives \cite{shin2015recognizing}.
-
-To use deep learning the way of representing dataset, i.e. softwares, is required and should meet the following criteria:
-
-\textbf{Program Structure.} Detailed information of software should be included in order to achieve function-level granularity.
-Representation should be able to determine in which function the vulnerability resides, which cannot be accomplished with simple code metrics such as LoC.
-Therefore program structure should be included at some level to help model determine the location of vulnerability.
-Both the raw form such as binary \cite{shin2015recognizing, kosmidis2017machine} and preprocessed form such as abstract syntax trees \cite{wang2016automatically}
-have been used as representation of software for deep learning models.
-
-\textbf{Program Context.} Control flow and dependence of program are also required. Since same code can be either safe or vulnerable depending on the context.
-Figure shows how almost identical programs can be classified differently by the context.
-This difference cannot be distinguished by program structures only. Hence, additional information in representation is required.
-
-\subsection{Representation}
-We use code property graph which was introduced to effectively mine large amounts of source code for vulnerabilities \cite{yamaguchi2014modeling}.
-Code property graph combines abstract syntax tree, control flow graph and program dependency graph, therefore comprehensively includes requirements mentioned above.
+\label{section:approach}
 
 \input{./figure/samplecode}
 
 \begin{figure*}[ht]
 	\centering
-	\begin{subfigure}[t]{0.3\textwidth}
+	\begin{subfigure}[t]{0.33\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth,height=0.65\textwidth,keepaspectratio]{./figure/ast.eps}
 		\caption{Abstract Syntax Tree}
 		\label{figure:ast}
 	\end{subfigure}
-	\begin{subfigure}[t]{0.3\textwidth}
+	\begin{subfigure}[t]{0.33\textwidth}
 		\centering
 		\includegraphics[width=2\textwidth,height=0.65\textwidth,keepaspectratio]{./figure/cfg.eps}
 		\caption{Control Flow Graph}
 		\label{figure:cfg}
 	\end{subfigure}
-	\begin{subfigure}[t]{0.3\textwidth}
+	\begin{subfigure}[t]{0.33\textwidth}
 		\centering
 		\includegraphics[width=1\textwidth,height=0.65\textwidth,keepaspectratio]{./figure/pdg.eps}
 		\caption{Program Dependency Graph}
 		\label{figure:pdg}
 	\end{subfigure}
 	\caption{Representations of code for the example in Figure~\ref{figure:sample}.}
+\end{figure*}
+
+To address the limitations identified in the previous section, we need representation more comprehensive than those used in existing vulnerability detection methods.
+Execution time of detection should also be scalable.
+Deep learning can achieve both effectiveness and efficiency of detection.
+Shin et al. found that applying deep learning for software analysis has advantages in many perspectives \cite{shin2015recognizing}.
+To use deep learning, how to represent input data and learning model should be decided.
+% different 쓰지 말고, `기존의 vuln detection과 달리 comprehensive 한게 필요하다~'
+% 실행시간 다시 언급
+% 장점들 설명
+% DL을 왜 사용하는지 설명
+% DL을 사용할 때 어떤 식으로 해야하는지가 이후로
+
+The way of representing dataset, i.e. softwares, should meet the following criteria:
+
+\textbf{Program Structure.} Each element of representation should include information of software in order to achieve function-level granularity.
+Representation should be able to determine in which function the vulnerability resides, which cannot be accomplished with simple code metrics such as LoC.
+% LoC도 앞에서 SDP 날리면 같이 날리기
+% detailed information은 의미가 약간 다른듯
+% fine-grained는 너무 모호함
+% `작은 부분마다'라는 의미가 필요
+Therefore, information of software should be distributed to detailed component of program structure to help model determine the exact location of vulnerability.
+Both the raw form such as binary \cite{shin2015recognizing, kosmidis2017machine} and preprocessed form such as abstract syntax trees \cite{wang2016automatically}
+have been used as representation of software for deep learning models.
+
+\textbf{Program Context.} Since same code can be either safe or vulnerable depending on the context,
+detailed information of control flow and dependence of program are also required.
+This difference cannot be distinguished by program structures only. Hence, additional information in representation is required.
+% detailed information이 오히려 여기로
+% accuracy를 위함을 기존 ML 연구들의 representation과 비교해야 할듯
+
+\subsection{Representation}
+% 위의 requirement를 만족시키기 위해 CPG를 사용한다.
+I use code property graph to satisfy requirements described above.
+Code property graph was introduced to effectively mine large amounts of source code for vulnerabilities \cite{yamaguchi2014modeling}.
+% 왜 CPG가 requirement를 만족시키는지 설명
+Code property graph combines abstract syntax tree, control flow graph and program dependency graph.
+Thus, syntactic structure, control flow and dependency between each part of software code are included, successfully meeting requirements mentioned above.
+
+\begin{figure*}[ht]
+	\centering
+	\includegraphics[width=0.7\textwidth,height=0.65\textwidth,keepaspectratio]{./figure/cpg.eps}
+	\caption{Code Property Graph}
+	\label{figure:cpg}
 \end{figure*}
 
 \textbf{Abstract Syntax Tree (AST)} Abstract syntax trees represent structure of source code in an abstract way.
@@ -62,28 +88,38 @@ The combination of three graphs forms code property graph shown in Figure~\ref{f
 \subsection{Learning Model for Graph Data}
 
 Since we use code property graph as program representation, we need neural network model which takes graph data as input.
-Code property graph is a directed graph with edges of multiple attributes.
+Code property graph is a directed multigraph with edges containing multiple, isolated attributes.
+% directed multigraph + edges with `isolated' attribute
 We consider typical learning models for graph data:
 
-\textbf{Graph Kernel.} Graph kernel is a function that computes similarities between inputs.
-Graph kernel has been mainly applied in bioinformatics and chemoinformatics, for instance, predicting protein function by its structure.
-Classical graph kernels are based on walks and paths, subgraphs or subtrees.
+\textbf{Support Vector Machine with Graph Kernel.} Support vector machine (SVM) is a type of machine learning that can classify input data.
+SVM calculates decision surface using cross products of inputs.
+Although SVM is not deep learning method, it can be used as baseline.
+Kernel in SVM is a function that adjusts input data or their cross products.
+Kernel is used to help SVM to classify data more efficiently, by mapping different inputs more distinctly.
+% SVM with Graph Kernel로 하고, DL은 아니지만 baseline으로 활용할 수 있다
+% SVM이 어떻게 활용되는지
+Graph kernel, a kernel function for graph input, has been mainly applied in bioinformatics and cheminformatics, for instance, predicting protein function by its structure.
+Classical graph kernels are based on walks, paths, subgraphs or subtrees.
+% kernel이 어떻게 machine learning에 활용되는지
 
 Weisfeiler-Lehman (WL) graph kernel \cite{shervashidze2011weisfeiler} is state-of-the-art among graph kernels.
 WL graph kernel generates feature vector from subtree pattern in every iteration.
-Algorithm first labels each node, and repeates determining subtree pattern from each node.
-Feature vector consists of numbers of each label appeared during the algorithm.
-The similarity between graphs can be calculated as the inner product of their feature vectors.
+In algorithm, neighborhood information is compressed to label of each node.
+Feature vector are then created in each iteration, consists of numbers of each label appeared during the algorithm.
+The similarity between graphs are calculated as the inner product of their feature vectors.
+% subtree? 설명 필요 : neighborhood가 label로 compress되고~
+% too detailed
+% 각 iteration별로 만들어진 feature vector의 inner product의 합
 
 \textbf{Graph Neural Network} Graph neural network (GNN) is a learning model which directly uses input graph layout as model \cite{gori2005new}.
 GNN extends recursive neural networks, using nodes of input graph as state representations.
 For each iteration, state values are updated by being propagating by other connected states.
 GNN eventually generates some desired attribute of the input graph.
 Li et al. introduced Gated graph sequence neural network (GGS-NN) based on GNN.
-GGS-NN is an extend model of GNN which can find the output sequence of graph producing such attribute \cite{li2015gated}.
+GGS-NN is an extended	 model of GNN which can find the output sequence of graph producing such attribute \cite{li2015gated}.
 
-\textbf{Convolutional Neural Network for Graph} Convolutional neural network (CNN) is typical deep learning model used widely in image recognition.
-Typically CNN takes 2-dimensional data, usually image, as input and feed forward them in network with convolution operations.
+\textbf{Convolutional Neural Network for Graph}
 Niepert et al. presented an approach to process general graphs with CNN by considering input of classical CNN as lattice graph \cite{niepert2016learning}.
 From such perspective, receptive field of classical CNN is a neighborhood subgraph from certain node with fixed width.
-Thus for an arbitrary input graph, receptive field can be generated and consequenty passed as input to classical CNN.
+Thus for an arbitrary input graph, receptive field can be generated and consequently passed as input to classical CNN.
