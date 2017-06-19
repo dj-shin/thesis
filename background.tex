@@ -3,35 +3,15 @@
 
 In this section, we provide background knowledge about vulnerability and neural network which is also known as deep learning.
 
-Vulnerability is a flaw in a system which can be exploited by an attacker.
-While bug simply means a system flaw, vulnerability also requires access to such flaw and capability exploit it.
-
-\eat{
-% 앞서 나온 문장에 맞춰서 weakness 대신 flaw
-Although current research detecting vulnerabilties and bugs share many approaches and techniques in common,
-% research는 불가산, vuln, bug, malware -> vulns, bugs, malwares
-there are critical difference that should be distinguished between them.
-Vulnerability also differs from malware. Malware is a malicious software which is intended to be hostile,
-while vulnerability is basically an unintended flaw in naive software.
-In this paper we focus on inherent vulnerabilities in software such as memory corruption.
-% malware 비교 필요없을듯
-% bug와 approach를 공유한다는 것도 필요없을듯
-%
-% 여기서는 bug와의 차이 정도로만 설명하고 Problem definition으로 빼기
-}
-
-\subsection{Neural Network}
-
+\subsection{Neural Network.}
 Neural network is a model used in machine learning. Nodes in neural network are called neurons.
 Connections between neurons are used to propagate values to each other, with value of each edge works as a weight of propagation.
 Adjusting weights of each connection by propagating forward and backward, the neural network `learns' how to evaluate desired output features from features contained in input data.
 Neural network can be structured as multiple layers and operates propagation between adjacent layers.
 Model with more layers can represent more complex attributes, which are called deep learning models.
 
-\subsection{Convolutional Neural Network}
-
+\subsection{Convolutional Neural Network.}
 Convolutional neural network (CNN) is a deep learning model which is widely used in image and video recognition and natural language processing.
 Typically, the CNN takes 2-dimensional data, usually image, as input and feed forward them in network with convolution operations.
 A convolution operation takes a small region in input and reduce the region into single value.
 The convolution layer works as a feature extractor, reducing the complexity of input by preserving desired high level features only.
-% input에 있는 feature를 weight가 연산되어서 output feature가 만들어진다는 insight

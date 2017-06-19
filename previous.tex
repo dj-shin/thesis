@@ -1,56 +1,29 @@
 \section{Previous Research}
 \label{section:previous}
 
-How to detect vulnerability in software has been studied long and diverse methods have been introduced.
-Previous methods include static or dynamic analysis, formal verification, and a variant of bug detection methods.
-% Problem definition : subsection 없는 section으로 분리
-In this section I introduce typical previous research such as static analysis or bug detection,
+How to detect vulnerabilities in software has been studied long and diverse methods have been introduced such as static or dynamic analysis, formal verification, and a variant of bug detection methods.
+In this section I will introduce three types of typical previous research, static analysis, dynamic analysis, and metric-based vulnerability detection,
 and motivate the need for a new means of vulnerability detection by showing their limitations.
-% previous research로 빼
 
 \subsection{Static Analysis}
-
 Static analysis is a way of analysing software without running the software itself.
 This includes symbolic execution such as KLEE \cite{cadar2008klee}, which determines what input leads to certain part of the program by using symbolic values for variables.
 It can detect vulnerability with specific attack vector and clearly show how it exploits the program.
 However symbolic execution has limitation known as path explosion which makes using symbolic execution on large softwares practically infeasible.
-% 실행시간에 더 포인트를 두고 granularity/accuracy는 acceptable한 level로 한다~라고 설명
-% DL이 accurarcy가 static analysis 보다 나을 수가 없음
 
 Other methods of static analysis include formal verification, which proves program specification based on mathematical design.
 Although being applied in recent softwares \cite{rustbelt}, formal verification has difficulty of designing program specifications into mathematical form and proving them, both of which cannot be done in automated way.
 
 \subsection{Dynamic Analysis}
-
 In contrast to static analysis, dynamic analysis executes the software for analysis and observes its behaviour.
 Dynamic analysis can be used in memory error detection \cite{valgrind}, software testing associated with code coverage \cite{huang2015code},
 or analysing program behaviour \cite{newsome2005dynamic, enck2014taintdroid}.
-However dynamic analysis has limited scope of detection, for instance, only restricted for memory corruption
+However dynamic analysis requires manual specification of detection, which makes automating dynamic analysis difficult.
 Moreover, they cannot consider every possible attack vectors.
-% VCC 논문 보고 문장 고쳐서 reference
-% limited scope이 뭔지?
-% 결국 motivation이 가장 중요하니 드러내기
 
-\subsection{Software Metrics}
-
+\subsection{Metric-based Analysis}
 Metric-based detection method uses code features such as lines of code(LoC) or function call dependency to detect vulnerabilities.
 Neuhaus et al. \cite{neuhaus2007predicting} designed predictor detecting vulnerable components based on function calls.
 Despite metric-based detection can be executed fast, it lacks detection granularity and accuracy.
 
-% static/dynamic도 bug detection인데?
-% ML에 포커스
-% 첫번째 순서로?
-
 Other recent research includes detecting buffer overruns from source code using neural memory networks \cite{choi2017end}, however it cannot be extended to general types of vulnerabilities.
-
-\eat{
-Bug detection is a different problem domain from vulnerability detection, but due to their relevance some bug detection approaches have been applied to finding vulnerabilities.
-Software defect prediction \cite{khoshgoftaar2009attribute, lessmann2008benchmarking} is one of classic bug detection methods.
-As a metric-based method it uses code features such as lines of code(LoC) or function call dependency.
-
-Approaches using machine learning have also been applied to improve the accuracy of prediction \cite{gao2011choosing, wang2016automatically}.
-They can effectively detect bugs even in large softwares, but since they rely on overall metrics the granularity of detection is mostly limited to file or module level.
-In order to reflect more sophisticated attributes of software, other means of representation and algorithm is required.
-% Toward Large-scale 논문 사용 - 한계 지적
-% AST (SDP 계열은 다 빼는걸로)
-}
